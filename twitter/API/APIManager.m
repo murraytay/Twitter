@@ -7,10 +7,10 @@
 //
 
 #import "APIManager.h"
-
+#import "Tweet.h"
 static NSString * const baseURLString = @"https://api.twitter.com";
-static NSString * const consumerKey = // Enter your consumer key here
-static NSString * const consumerSecret = // Enter your consumer secret here
+static NSString * const consumerKey = @"l4AJiSzc5JHsCpzXIQ7UW40pp";
+static NSString * const consumerSecret = @"EvND80YOlZ1WUndlNMMtZAU1vu8mE2IWHg3G0hsVa62x5rLDgp";
 
 @interface APIManager()
 
@@ -46,17 +46,30 @@ static NSString * const consumerSecret = // Enter your consumer secret here
     }
     return self;
 }
+-(void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion{
+    NSString *urlString = @"1.1/statuses/update.json";
+    NSDictionary *parameters = @{@"status": text};
+    
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
 
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion {
     
     [self GET:@"1.1/statuses/home_timeline.json"
    parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
        
+       NSMutableArray *tweets = [Tweet tweetsWithArray:tweetDictionaries];
+       
        // Manually cache the tweets. If the request fails, restore from cache if possible.
        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:tweetDictionaries];
        [[NSUserDefaults standardUserDefaults] setValue:data forKey:@"hometimeline_tweets"];
 
-       completion(tweetDictionaries, nil);
+       completion(tweets, nil);
        
    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
        
@@ -68,7 +81,7 @@ static NSString * const consumerSecret = // Enter your consumer secret here
            tweetDictionaries = [NSKeyedUnarchiver unarchiveObjectWithData:data];
        }
        
-       completion(tweetDictionaries, error);
+       completion(nil, error);
    }];
 }
 
