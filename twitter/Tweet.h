@@ -20,7 +20,7 @@
 //for retweets
 @property (strong, nonatomic) User *retweetedByUser;
 
-+(NSMutableArray *)tweetsWithArray:(NSArray *)dictionaries;
++(NSMutableArray *)tweetsWithArray:(NSMutableArray *)dictionaries;
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

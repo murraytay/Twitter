@@ -46,6 +46,7 @@
         } else{
             [self.delegate didTweet:tweet];
             NSLog(@"Compose Tweet Success!");
+            [self dismissViewControllerAnimated:true completion:nil];
         }
     }];
     

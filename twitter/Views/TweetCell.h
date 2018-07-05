@@ -20,4 +20,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 
 @property (strong, nonatomic) Tweet *tweet;
+-(void)setTweet:(Tweet *)tweet;
 @end

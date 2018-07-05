@@ -9,7 +9,7 @@
 #import "Tweet.h"
 
 @implementation Tweet
-+(NSMutableArray *)tweetsWithArray:(NSArray *)dictionaries{
++(NSMutableArray *)tweetsWithArray:(NSMutableArray *)dictionaries{
     NSMutableArray *tweetArray = [[NSMutableArray alloc] init];
     for(NSDictionary *dic in dictionaries){
         Tweet *tweet = [[Tweet alloc] initWithDictionary:dic];
