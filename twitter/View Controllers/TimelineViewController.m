@@ -13,6 +13,7 @@
 #import "ComposeViewController.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "DetailsViewController.h"
 @interface TimelineViewController () <UITableViewDelegate,UITableViewDataSource,ComposeViewControllerDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *timelineTableView;
 @property (nonatomic,strong) NSArray *arrayOfTweets;
@@ -132,9 +133,21 @@
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
-     UINavigationController *navigationController = [segue destinationViewController];
-     ComposeViewController *composeViewController = (ComposeViewController *)navigationController.topViewController;
-     composeViewController.delegate = self;
+     if([segue.identifier isEqualToString:@"detail-segue"]){
+         TweetCell *tappedCell = sender;
+         NSIndexPath *indexPath = [self.timelineTableView indexPathForCell:tappedCell];
+         Tweet *thisTweet = self.arrayOfTweets[indexPath.row];
+         
+         DetailsViewController *detailViewController = [segue destinationViewController];
+         detailViewController.tweet = thisTweet;
+         
+     } else{
+         UINavigationController *navigationController = [segue destinationViewController];
+         ComposeViewController *composeViewController = (ComposeViewController *)navigationController.topViewController;
+         composeViewController.delegate = self;
+     }
+     
+     
  }
  
 
