@@ -18,24 +18,34 @@
 @property (weak, nonatomic) IBOutlet UITableView *timelineTableView;
 @property (nonatomic,strong) NSArray *arrayOfTweets;
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
-//@property (nonatomic,assign) BOOL isMoreDataLoading;
+@property (nonatomic, strong) User *currentUser;
+@property (nonatomic,assign) BOOL isMoreDataLoading;
 @end
 
 @implementation TimelineViewController
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    if(!self.isMoreDataLoading){
-//        // Calculate the position of one screen length before the bottom of the results
-//        int scrollViewContentHeight = self.timelineTableView.contentSize.height;
-//        int scrollOffsetThreshold = scrollViewContentHeight - self.timelineTableView.bounds.size.height;
-//
-//        // When the user has scrolled past the threshold, start requesting
-//        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.timelineTableView.isDragging) {
-//            self.isMoreDataLoading = true;
-//            [self loadMoreData];
-//            // ... Code to load more results ...
-//        }
-//    }
-//}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if(!self.isMoreDataLoading){
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.timelineTableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.timelineTableView.bounds.size.height;
+
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.timelineTableView.isDragging) {
+            self.isMoreDataLoading = true;
+            [[APIManager shared] getHomeTimelineWithCompletionScroll:^(NSArray *tweets, NSError *error) {
+                if(tweets){
+                    self.isMoreDataLoading = false;
+                    self.arrayOfTweets = tweets;
+                    [self.timelineTableView reloadData];
+                } else{
+                    NSLog(@"we got an error biysss");
+                }
+            }];
+        }
+
+    }
+}
+
 
 - (IBAction)logoutAction:(UIBarButtonItem *)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -51,14 +61,25 @@
     self.timelineTableView.delegate = self;
     self.timelineTableView.dataSource = self;
     
+    [[APIManager shared] getUser:^(User *user, NSError *error) {
+        if(user){
+            self.currentUser = user;
+        } else{
+            NSLog(@"We lost him boys");
+        }
+    }];
+    
     [self fetchTweets];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchTweets) forControlEvents:UIControlEventValueChanged];
     
     [self.timelineTableView insertSubview:self.refreshControl atIndex:0];
+    
+    
 
 }
+
 
 //-(void)loadMoreData{
 //    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
@@ -112,7 +133,10 @@
     NSURL *profilePicURL = [NSURL URLWithString:cell.tweet.user.profileURLString];
     
     [cell.profilePictureImage setImageWithURL:profilePicURL];
+
+    NSURL *mediaURL = [NSURL URLWithString:tweet.mediaArray[0][@"media_url_https"]];
     
+    [cell.mediaImage setImageWithURL:mediaURL];
     
     return cell;
     
@@ -134,17 +158,22 @@
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
      if([segue.identifier isEqualToString:@"detail-segue"]){
+         
          TweetCell *tappedCell = sender;
          NSIndexPath *indexPath = [self.timelineTableView indexPathForCell:tappedCell];
          Tweet *thisTweet = self.arrayOfTweets[indexPath.row];
          
          DetailsViewController *detailViewController = [segue destinationViewController];
          detailViewController.tweet = thisTweet;
-         
+         detailViewController.delegate = sender;
+         NSLog(@"idk");
      } else{
          UINavigationController *navigationController = [segue destinationViewController];
          ComposeViewController *composeViewController = (ComposeViewController *)navigationController.topViewController;
          composeViewController.delegate = self;
+         
+         composeViewController.profilepicURL = [NSURL URLWithString:self.currentUser.profileURLString];
+         NSLog(@"checking current user");
      }
      
      

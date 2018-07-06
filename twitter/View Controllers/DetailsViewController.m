@@ -9,6 +9,7 @@
 #import "DetailsViewController.h"
 #import <UIKit+AFNetworking.h>
 #import "APIManager.h"
+#import "SelectedUserViewController.h"
 @interface DetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
@@ -48,6 +49,7 @@
             }
             else{
                 NSLog(@"Successfully unrewteeted the following Tweet: %@", tweet.text);
+                [self.delegate didModifyTweet:self.tweet];
             }
         }];
     } else{
@@ -59,6 +61,7 @@
             }
             else{
                 NSLog(@"Successfully retweeted the following Tweet: %@", tweet.text);
+                [self.delegate didModifyTweet:self.tweet];
             }
         }];
     }
@@ -74,6 +77,7 @@
             }
             else{
                 NSLog(@"Successfully unfavorited the following Tweet: %@", tweet.text);
+                [self.delegate didModifyTweet:self.tweet];
             }
         }];
     } else{
@@ -86,6 +90,7 @@
             }
             else{
                 NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
+                [self.delegate didModifyTweet:self.tweet];
             }
         }];
         
@@ -123,14 +128,17 @@
     
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    SelectedUserViewController *selectedViewController = [segue destinationViewController];
+    selectedViewController.user = self.tweet.user;
+    
 }
-*/
+
 
 @end

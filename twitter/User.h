@@ -12,5 +12,10 @@
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) NSString *screenName;
 @property (nonatomic, strong) NSString *profileURLString;
+@property (nonatomic,strong) NSString *bannerURLString;
+@property (nonatomic,strong) NSNumber *followersCount;
+@property (nonatomic, strong) NSNumber *followingCount;
+@property (nonatomic, strong) NSString *descriptionUser;
+@property (nonatomic,strong) NSString *id_str;
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end

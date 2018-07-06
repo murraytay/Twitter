@@ -14,11 +14,14 @@
 
 @end
 
-@interface ComposeViewController : UIViewController
+@interface ComposeViewController : UIViewController <UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *charactersLeftLabel;
 @property (weak, nonatomic) IBOutlet UITextView *composeTextView;
 @property (weak, nonatomic) id<ComposeViewControllerDelegate> delegate;
 - (IBAction)cancelAction:(UIBarButtonItem *)sender;
 - (IBAction)tweetAction:(UIBarButtonItem *)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePicImage;
+@property (strong,nonatomic) NSURL *profilepicURL;
 
 @end
 

@@ -8,7 +8,7 @@
 
 #import "TweetCell.h"
 #import "APIManager.h"
-@implementation TweetCell
+@implementation TweetCell 
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -81,9 +81,15 @@
     [self refreshData];
 }
 
+-(void)didModifyTweet:(Tweet *)tweet{
+    _tweet = tweet;
+    [self refreshData];
+}
+
 -(void)refreshData{
     self.postTextLabel.text = self.tweet.text;
     self.nameLabel.text = self.tweet.user.name;
+    self.dateLabel.text = self.tweet.createdAtString;
     NSString *at = @"@";
     self.usernameLabel.text = [at stringByAppendingString:self.tweet.user.screenName];
     self.dateLabel.text = self.tweet.createdAtString;

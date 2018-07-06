@@ -7,7 +7,7 @@
 //
 
 #import "Tweet.h"
-
+#import "DateTools.h"
 @implementation Tweet
 +(NSMutableArray *)tweetsWithArray:(NSMutableArray *)dictionaries{
     NSMutableArray *tweetArray = [[NSMutableArray alloc] init];
@@ -37,8 +37,7 @@
         self.favorited = [dictionary[@"favorited"] boolValue];
         self.retweetCount = [dictionary[@"retweet_count"] intValue];
         self.retweeted = [dictionary[@"retweeted"] boolValue];
-        self.createdAtString = dictionary[@"created_at"];
-        
+        self.mediaArray = dictionary[@"entities"][@"media"];
         NSDictionary *user = dictionary[@"user"];
         
         self.user = [[User alloc] initWithDictionary:user];
@@ -49,12 +48,18 @@
         formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
         //Convert String to Date
         NSDate *date = [formatter dateFromString:createdAtOriginalString];
-        //configure output format
-        formatter.dateStyle = NSDateFormatterShortStyle;
-        formatter.timeStyle = NSDateFormatterNoStyle;
-        //convert date tp string
-        self.createdAtString = [formatter stringFromDate:date];
-        
+//        //configure output format
+//        formatter.dateStyle = NSDateFormatterLongStyle;
+//        formatter.timeStyle = NSDateFormatterNoStyle;
+//        //convert date tp string
+//        self.createdAtString = [formatter stringFromDate:date];
+        //NSDate *timeAgoDate = [NSDate dateWithTimeIntervalSinceNow:date.timeIntervalSinceNow];
+        //NSLog(@"Time Ago: %@", timeAgoDate.timeAgoSinceNow);
+        self.createdAtString = date.timeAgoSinceNow;
+        //Output:
+        //Time Ago: 4 seconds ago
+        //Time Ago: 4s
+        NSLog(@"random for date");
     }
     return self;
 }

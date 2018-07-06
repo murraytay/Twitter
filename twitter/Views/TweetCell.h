@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Tweet.h"
-@interface TweetCell : UITableViewCell
+#import "DetailsViewController.h"
+@interface TweetCell : UITableViewCell <DetailsViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postTextLabel;
@@ -18,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *favLabel;
 @property (weak, nonatomic) IBOutlet UIButton *favButton;
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
+@property (weak, nonatomic) IBOutlet UIImageView *mediaImage;
 
 @property (strong, nonatomic) Tweet *tweet;
 -(void)setTweet:(Tweet *)tweet;

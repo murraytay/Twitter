@@ -17,6 +17,7 @@
 @property (nonatomic) BOOL retweeted;
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) NSString *createdAtString;
+@property (strong, nonatomic) NSArray *mediaArray;
 //for retweets
 @property (strong, nonatomic) User *retweetedByUser;
 

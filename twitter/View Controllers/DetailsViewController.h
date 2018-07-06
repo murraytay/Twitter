@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Tweet.h"
+@protocol DetailsViewControllerDelegate
+
+-(void)didModifyTweet:(Tweet *)tweet;
+@end
+
 @interface DetailsViewController : UIViewController
 @property (strong,nonatomic)Tweet *tweet;
+@property (weak,nonatomic) id<DetailsViewControllerDelegate> delegate;
 @end

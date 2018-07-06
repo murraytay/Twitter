@@ -8,14 +8,26 @@
 
 #import "ComposeViewController.h"
 #import "APIManager.h"
+#import <UIKit+AFNetworking.h>
 @interface ComposeViewController ()
 
 @end
 
-@implementation ComposeViewController
+@implementation ComposeViewController 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.composeTextView.delegate = self;
+    
+    NSString *endString = @" characters left";
+    int characterLimit = 140;
+    int charactersLeft = characterLimit - self.composeTextView.text.length;
+    NSString *left = [NSString stringWithFormat:@"%d",charactersLeft];
+    self.charactersLeftLabel.text = [left stringByAppendingString:endString];
+    
+    [self.profilePicImage setImageWithURL:self.profilepicURL];
+    
     // Do any additional setup after loading the view.
     [self.composeTextView becomeFirstResponder];
 }
@@ -25,6 +37,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    int characterLimit = 140;
+    NSString *newText = [self.composeTextView.text stringByReplacingCharactersInRange:range withString:text];
+    
+    return newText.length < characterLimit;
+    
+}
+- (void)textViewDidChange:(UITextView *)textView{
+    NSString *endString = @" characters left";
+    int characterLimit = 140;
+    int charactersLeft = characterLimit - self.composeTextView.text.length;
+     NSString *left = [NSString stringWithFormat:@"%d",charactersLeft];
+    self.charactersLeftLabel.text = [left stringByAppendingString:endString];
+}
 /*
 #pragma mark - Navigation
 
