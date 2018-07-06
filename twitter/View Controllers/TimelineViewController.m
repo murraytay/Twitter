@@ -19,6 +19,7 @@
 @property (nonatomic,strong) NSArray *arrayOfTweets;
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) User *currentUser;
+@property (nonatomic, strong) NSNumber *numPostsDisplaying;
 @property (nonatomic,assign) BOOL isMoreDataLoading;
 @end
 
@@ -32,10 +33,11 @@
         // When the user has scrolled past the threshold, start requesting
         if(scrollView.contentOffset.y > scrollOffsetThreshold && self.timelineTableView.isDragging) {
             self.isMoreDataLoading = true;
-            [[APIManager shared] getHomeTimelineWithCompletionScroll:^(NSArray *tweets, NSError *error) {
+            [[APIManager shared] getHomeTimelineWithCompletionScroll:self.numPostsDisplaying completion:^(NSArray *tweets, NSError *error) {
                 if(tweets){
                     self.isMoreDataLoading = false;
                     self.arrayOfTweets = tweets;
+                    self.numPostsDisplaying = [NSNumber numberWithInt:[self.numPostsDisplaying intValue] + 7];
                     [self.timelineTableView reloadData];
                 } else{
                     NSLog(@"we got an error biysss");
@@ -68,7 +70,7 @@
             NSLog(@"We lost him boys");
         }
     }];
-    
+    self.numPostsDisplaying = [NSNumber numberWithInt:20];
     [self fetchTweets];
     
     self.refreshControl = [[UIRefreshControl alloc] init];

@@ -151,10 +151,12 @@ static NSString * const consumerSecret = @"EvND80YOlZ1WUndlNMMtZAU1vu8mE2IWHg3G0
    }];
 }
 
-- (void)getHomeTimelineWithCompletionScroll:(void(^)(NSArray *tweets, NSError *error))completion {
-    
+- (void)getHomeTimelineWithCompletionScroll:(NSNumber *)numberOfPosts completion:(void(^)(NSArray *tweets, NSError *error))completion {
+    NSNumber *sum = [NSNumber numberWithFloat:([numberOfPosts floatValue] + 7)];
+    NSString *sumString = [sum stringValue];
+    NSDictionary *parameters = @{@"count":sumString};
     [self GET:@"1.1/statuses/home_timeline.json"
-   parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
+   parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
        
        NSArray *tweetsOld = [Tweet tweetsWithArray:tweetDictionaries];
        

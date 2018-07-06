@@ -20,6 +20,6 @@
 - (void)retweet:(Tweet *)tweet completion:(void(^)(Tweet *, NSError *))completion;
 - (void)unretweet:(Tweet *)tweet completion:(void(^)(Tweet *, NSError *))completion;
 - (void)getUser:(void(^)(User *, NSError *))completion;
-- (void)getHomeTimelineWithCompletionScroll:(void(^)(NSArray *tweets, NSError *error))completion;
+- (void)getHomeTimelineWithCompletionScroll:(NSNumber *)numberOfPosts completion:(void(^)(NSArray *tweets, NSError *error))completion;
 -(void)userTimeline:(User *)user completion:(void(^)(NSArray *tweets, NSError *error))completion;
 @end
