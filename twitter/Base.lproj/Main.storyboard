@@ -149,6 +149,23 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VoA-3h-of1">
                                                     <rect key="frame" x="74" y="72" width="278" height="77"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVr-Hr-R6m">
+                                                    <rect key="frame" x="118" y="155" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="DJo-7Z-yc0"/>
+                                                        <constraint firstAttribute="height" constant="30" id="km3-Q6-HQp"/>
+                                                    </constraints>
+                                                    <state key="normal" image="reply-icon"/>
+                                                    <connections>
+                                                        <action selector="didTapReply:" destination="dTT-aa-G5g" eventType="touchUpInside" id="gXT-4r-dJV"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vM6-Qy-1vE">
+                                                    <rect key="frame" x="166" y="166" width="24" height="11"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="HJS-Ja-6Ck" secondAttribute="trailing" constant="15" id="0Mt-C0-PWB"/>
@@ -157,6 +174,7 @@
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="whp-yV-uvZ" secondAttribute="bottom" constant="10" id="2Cv-BY-AIZ"/>
                                                 <constraint firstItem="whp-yV-uvZ" firstAttribute="leading" secondItem="48M-qE-Fcb" secondAttribute="leading" constant="10" id="6SA-Bn-RSc"/>
                                                 <constraint firstItem="JkQ-4D-PC7" firstAttribute="top" secondItem="VoA-3h-of1" secondAttribute="bottom" constant="8" id="85X-RI-YWs"/>
+                                                <constraint firstAttribute="bottom" secondItem="AVr-Hr-R6m" secondAttribute="bottom" constant="6.5" id="8LY-Jj-hRO"/>
                                                 <constraint firstItem="HJS-Ja-6Ck" firstAttribute="top" secondItem="48M-qE-Fcb" secondAttribute="top" constant="16" id="8R9-dl-dRY"/>
                                                 <constraint firstAttribute="trailing" secondItem="n7i-Wr-hyh" secondAttribute="trailing" constant="15" id="BII-OD-lEk"/>
                                                 <constraint firstAttribute="trailing" secondItem="7Ex-DT-PbY" secondAttribute="trailing" constant="15" id="Bxt-gN-2MP"/>
@@ -169,6 +187,7 @@
                                                 <constraint firstItem="bbj-Bd-jSa" firstAttribute="top" secondItem="48M-qE-Fcb" secondAttribute="top" constant="16" id="X1D-Uj-i1b"/>
                                                 <constraint firstItem="n7i-Wr-hyh" firstAttribute="top" secondItem="CBD-nw-CHa" secondAttribute="bottom" constant="6" id="aru-R5-fU4"/>
                                                 <constraint firstAttribute="bottom" secondItem="lfB-wK-s3d" secondAttribute="bottom" constant="14.5" id="bwW-jD-oh6"/>
+                                                <constraint firstItem="JkQ-4D-PC7" firstAttribute="leading" secondItem="vM6-Qy-1vE" secondAttribute="trailing" constant="26" id="dpM-1R-sr6"/>
                                                 <constraint firstItem="VoA-3h-of1" firstAttribute="top" secondItem="n7i-Wr-hyh" secondAttribute="bottom" constant="15" id="fI8-iv-LU8"/>
                                                 <constraint firstItem="CBD-nw-CHa" firstAttribute="top" secondItem="48M-qE-Fcb" secondAttribute="top" constant="10" id="fwW-AE-RlL"/>
                                                 <constraint firstItem="whp-yV-uvZ" firstAttribute="top" secondItem="48M-qE-Fcb" secondAttribute="top" constant="10" id="j5E-qB-rnr"/>
@@ -176,8 +195,11 @@
                                                 <constraint firstItem="bbj-Bd-jSa" firstAttribute="leading" secondItem="CBD-nw-CHa" secondAttribute="trailing" constant="8" id="lns-Gd-PO7"/>
                                                 <constraint firstItem="lfB-wK-s3d" firstAttribute="leading" secondItem="JkQ-4D-PC7" secondAttribute="trailing" constant="9.5" id="nrv-4i-Gkb"/>
                                                 <constraint firstAttribute="bottom" secondItem="7Ex-DT-PbY" secondAttribute="bottom" constant="14.5" id="oFN-vC-MMU"/>
+                                                <constraint firstItem="vM6-Qy-1vE" firstAttribute="leading" secondItem="AVr-Hr-R6m" secondAttribute="trailing" constant="18" id="okJ-TV-AUb"/>
+                                                <constraint firstItem="AVr-Hr-R6m" firstAttribute="top" secondItem="VoA-3h-of1" secondAttribute="bottom" constant="6" id="rII-4J-80Y"/>
                                                 <constraint firstItem="CBD-nw-CHa" firstAttribute="leading" secondItem="whp-yV-uvZ" secondAttribute="trailing" constant="8" id="trc-gJ-tJw"/>
                                                 <constraint firstItem="VoA-3h-of1" firstAttribute="leading" secondItem="48M-qE-Fcb" secondAttribute="leading" constant="74" id="v72-t8-NT8"/>
+                                                <constraint firstAttribute="bottom" secondItem="vM6-Qy-1vE" secondAttribute="bottom" constant="14.5" id="xYl-aM-Al9"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -188,6 +210,8 @@
                                             <outlet property="nameLabel" destination="CBD-nw-CHa" id="g0s-xJ-tME"/>
                                             <outlet property="postTextLabel" destination="n7i-Wr-hyh" id="yEW-UB-mTD"/>
                                             <outlet property="profilePictureImage" destination="whp-yV-uvZ" id="lPI-Pd-JF4"/>
+                                            <outlet property="replyButton" destination="AVr-Hr-R6m" id="JrD-x3-86G"/>
+                                            <outlet property="replyCountLabel" destination="vM6-Qy-1vE" id="naQ-U3-rEg"/>
                                             <outlet property="retweetButton" destination="JkQ-4D-PC7" id="c6y-4g-Omd"/>
                                             <outlet property="retweetLabel" destination="lfB-wK-s3d" id="3Ld-Ow-2nY"/>
                                             <outlet property="usernameLabel" destination="bbj-Bd-jSa" id="tYC-dR-Ilo"/>
@@ -225,6 +249,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQh-hN-GQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1409" y="329"/>
+        </scene>
+        <!--Reply View Controller-->
+        <scene sceneID="XCD-YZ-c9w">
+            <objects>
+                <viewController id="mrR-s2-q63" customClass="replyViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xf8-b9-y9p">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fi9-nL-Xjs">
+                                <rect key="frame" x="37" y="76" width="311" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="gJe-lv-5XT"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="do5-gP-YW0">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="EFC-aj-9y2">
+                            <connections>
+                                <action selector="cancelAction:" destination="mrR-s2-q63" id="4dh-TB-yts"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Reply" id="RRu-Gh-whC">
+                            <connections>
+                                <action selector="replyAction:" destination="mrR-s2-q63" id="xwH-Yf-ArR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cancelAction" destination="EFC-aj-9y2" id="qQw-Vu-MP7"/>
+                        <outlet property="replyAction" destination="RRu-Gh-whC" id="thi-uL-fEJ"/>
+                        <outlet property="replyTextView" destination="Fi9-nL-Xjs" id="iho-zO-4BL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KpD-C8-F2W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2564" y="1137.481259370315"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fsd-kj-rD8">
+            <objects>
+                <navigationController id="kzf-aU-7Nc" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ris-Xj-RXn">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="mrR-s2-q63" kind="relationship" relationship="rootViewController" id="VMb-Uf-WJU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ead-40-DpC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1646" y="1185"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="xpJ-B4-ZgT">
@@ -345,6 +426,9 @@
                                                     <constraint firstAttribute="width" constant="30" id="sZQ-py-LPC"/>
                                                 </constraints>
                                                 <state key="normal" image="reply-icon"/>
+                                                <connections>
+                                                    <segue destination="kzf-aU-7Nc" kind="presentation" identifier="reply-segue" id="j8n-D4-5v5"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

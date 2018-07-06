@@ -8,6 +8,7 @@
 
 #import "TweetCell.h"
 #import "APIManager.h"
+#import "replyViewController.h"
 @implementation TweetCell 
 
 - (void)awakeFromNib {
@@ -46,6 +47,7 @@
     }
     [self refreshData];
 }
+
 - (IBAction)didTapLike:(UIButton *)sender {
     if(self.tweet.favorited){
         self.tweet.favorited = NO;
@@ -87,6 +89,7 @@
 }
 
 -(void)refreshData{
+    
     self.postTextLabel.text = self.tweet.text;
     self.nameLabel.text = self.tweet.user.name;
     self.dateLabel.text = self.tweet.createdAtString;
@@ -108,6 +111,7 @@
     } else{
         [self.retweetButton setImage:[UIImage imageNamed:@"retweet-icon.png"] forState:UIControlStateNormal];
     }
+    self.replyCountLabel.text = [NSString stringWithFormat:@"%d", self.tweet.replyCount];
 }
 
 @end

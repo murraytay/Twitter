@@ -22,4 +22,5 @@
 - (void)getUser:(void(^)(User *, NSError *))completion;
 - (void)getHomeTimelineWithCompletionScroll:(NSNumber *)numberOfPosts completion:(void(^)(NSArray *tweets, NSError *error))completion;
 -(void)userTimeline:(User *)user completion:(void(^)(NSArray *tweets, NSError *error))completion;
+-(void)postReplyWithText:(NSString *)text user:(User *)user completion:(void(^)(Tweet *, NSError *))completion;
 @end

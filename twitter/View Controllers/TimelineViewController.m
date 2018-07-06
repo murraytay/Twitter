@@ -14,7 +14,8 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "DetailsViewController.h"
-@interface TimelineViewController () <UITableViewDelegate,UITableViewDataSource,ComposeViewControllerDelegate, UIScrollViewDelegate>
+#import "replyViewController.h"
+@interface TimelineViewController () <UITableViewDelegate,UITableViewDataSource,ComposeViewControllerDelegate, UIScrollViewDelegate, replyViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *timelineTableView;
 @property (nonatomic,strong) NSArray *arrayOfTweets;
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
@@ -180,8 +181,11 @@
      
      
  }
- 
-
+-(void)didReply:(Tweet *)tweet{
+    NSArray *newTweetArray = [self.arrayOfTweets arrayByAddingObject:tweet];
+    self.arrayOfTweets = newTweetArray;
+    [self fetchTweets];
+}
 
 
 

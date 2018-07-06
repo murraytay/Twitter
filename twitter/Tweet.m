@@ -31,6 +31,7 @@
             dictionary = originalTweet;
         }
         
+        self.replyCount = [dictionary[@"reply_count"] intValue];
         self.idStr = dictionary[@"id_str"];
         self.text = dictionary[@"text"];
         self.favoriteCount = [dictionary[@"favorite_count"] intValue];

@@ -18,6 +18,7 @@
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) NSString *createdAtString;
 @property (strong, nonatomic) NSArray *mediaArray;
+@property (nonatomic) int replyCount;
 //for retweets
 @property (strong, nonatomic) User *retweetedByUser;
 

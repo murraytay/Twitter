@@ -39,7 +39,7 @@
     
     self.nameLabel.text = self.user.name;
     self.screenNameLabel.text = [@"@" stringByAppendingString:self.user.screenName];
-    self.bioLabel.text = self.user.description;
+    self.bioLabel.text = self.user.descriptionUser;
     self.followerCountLabel.text = [self.user.followersCount stringValue];
     self.followingCountLabel.text = [self.user.followingCount stringValue];
     

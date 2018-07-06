@@ -10,6 +10,7 @@
 #import <UIKit+AFNetworking.h>
 #import "APIManager.h"
 #import "SelectedUserViewController.h"
+#import "replyViewController.h"
 @interface DetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
@@ -21,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *replyButton;
-
+@property (weak, nonatomic) UIViewController *timelineViewControllerthing;
 @end
 
 @implementation DetailsViewController
@@ -134,9 +135,17 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    SelectedUserViewController *selectedViewController = [segue destinationViewController];
-    selectedViewController.user = self.tweet.user;
+    if([segue.identifier isEqualToString:@"reply-segue"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        replyViewController *replyviewController = (replyViewController*)navigationController.topViewController;
+        replyviewController.replyingToUser = self.tweet.user;
+        replyviewController.delegate = self.timelineViewControllerthing;
+    } else{
+        // Pass the selected object to the new view controller.
+        SelectedUserViewController *selectedViewController = [segue destinationViewController];
+        selectedViewController.user = self.tweet.user;
+        
+    }
     
 }
 
