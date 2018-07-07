@@ -143,7 +143,7 @@
     } else{
         // Pass the selected object to the new view controller.
         SelectedUserViewController *selectedViewController = [segue destinationViewController];
-        selectedViewController.user = self.tweet.user;
+        selectedViewController.userMe = self.tweet.user;
         
     }
     

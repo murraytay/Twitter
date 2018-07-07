@@ -22,6 +22,17 @@
     
     self.profileTableView.delegate = self;
     self.profileTableView.dataSource = self;
+    
+    if(self.userMe == nil){
+        [[APIManager shared] getUser:^(User *user, NSError *error) {
+            if(user){
+                self.userMe = user;
+            } else{
+                NSLog(@"error in getting personal profile");
+            }
+        }];
+    }
+    
     [self setUI];
     [self fetchUserTweets];
     // Do any additional setup after loading the view.
@@ -34,23 +45,23 @@
 
 
 - (void)setUI{
-    NSURL *backgroundURL = [NSURL URLWithString:self.user.bannerURLString];
+    NSURL *backgroundURL = [NSURL URLWithString:self.userMe.bannerURLString];
     [self.backgroundImage setImageWithURL: backgroundURL];
     
-    self.nameLabel.text = self.user.name;
-    self.screenNameLabel.text = [@"@" stringByAppendingString:self.user.screenName];
-    self.bioLabel.text = self.user.descriptionUser;
-    self.followerCountLabel.text = [self.user.followersCount stringValue];
-    self.followingCountLabel.text = [self.user.followingCount stringValue];
+    self.nameLabel.text = self.userMe.name;
+    self.screenNameLabel.text = [@"@" stringByAppendingString:self.userMe.screenName];
+    self.bioLabel.text = self.userMe.descriptionUser;
+    self.followerCountLabel.text = [self.userMe.followersCount stringValue];
+    self.followingCountLabel.text = [self.userMe.followingCount stringValue];
     
-    NSURL *profileURL = [NSURL URLWithString:self.user.profileURLString];
+    NSURL *profileURL = [NSURL URLWithString:self.userMe.profileURLString];
     [self.profileImage setImageWithURL:profileURL];
     
     
 }
 
 -(void)fetchUserTweets{
-    [[APIManager shared] userTimeline:self.user completion:^(NSArray *tweets, NSError *error) {
+    [[APIManager shared] userTimeline:self.userMe completion:^(NSArray *tweets, NSError *error) {
         if(tweets){
             self.arrayTweets = tweets;
             [self.profileTableView reloadData];

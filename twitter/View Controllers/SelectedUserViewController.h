@@ -17,5 +17,5 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bioLabel;
-@property (strong,nonatomic) User *user;
+@property (strong,nonatomic) User *userMe;
 @end
