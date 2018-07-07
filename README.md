@@ -62,6 +62,8 @@ Here's a walkthrough of implemented user stories:
 
 https://github.com/murraytay/Twitter/blob/master/twitter_demo_logoutbetter.gif
 
+<img src='twitter_demo_logoutbetter.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 https://i.imgur.com/zIbNRuN.mp4
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
