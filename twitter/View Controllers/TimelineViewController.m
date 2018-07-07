@@ -138,7 +138,6 @@
     [cell.profilePictureImage setImageWithURL:profilePicURL];
 
     NSURL *mediaURL = [NSURL URLWithString:tweet.mediaArray[0][@"media_url_https"]];
-    
     [cell.mediaImage setImageWithURL:mediaURL];
     
     return cell;
